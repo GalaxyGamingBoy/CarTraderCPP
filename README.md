@@ -1,7 +1,7 @@
 # CarTraderCPP
 
-This project is made with the help of GitPod!
-You can edit the project with the button below!
+This project is made with the help of GitPod!             
+You can edit the project with the button below!          
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/from-referrer/)
 
 ## Build
