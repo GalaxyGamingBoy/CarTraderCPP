@@ -1,3 +1,4 @@
+@echo off
 cls
 g++ ./CarTrader/*.cpp -o out
 echo ----- ----- -----
