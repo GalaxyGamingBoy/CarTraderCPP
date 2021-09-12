@@ -3,7 +3,7 @@
 This project is made with the help of GitPod!             
 You can edit the project with the button below!          
               
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/from-referrer/)
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/GalaxyGamingBoy/CarTraderCPP)
 
 ## Build
 
