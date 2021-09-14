@@ -12,6 +12,9 @@ int main(){
     CommandList cl;
     Terminal terminal;
 
+    terminal.loggedInUser = guestUser;
+    terminal.registeredUsers.push_back(guestUser);
+
     terminal.startTerminal(cl);
 
     return 0;
