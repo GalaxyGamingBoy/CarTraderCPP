@@ -16,14 +16,11 @@ std::string Car::getModel(){
 int Car::getLowerValuePerYear(){
     return Car::lowerValuePerYear;
 }
-int Car::getDecreaseAmmount(){
-    return Car::decreaseAmmount;
-}
 int Car::getOriginalPrice(){
     return Car::originalPrice;
 }
-int Car::getBonus(){
-    return Car::bonus;
+int Car::getNotSoldBonus(){
+    return Car::notSoldBonus;
 }
 int Car::getCurrentPrice(){
     return Car::currentPrice;
@@ -53,16 +50,12 @@ int Car::setLowerValuePerYear(int value){
     Car::lowerValuePerYear = value;
     return 200;
 }
-int Car::setDecreaseAmmount(int ammount){
-    Car::decreaseAmmount = ammount;
-    return 200;
-}
 int Car::setOriginalPrice(int price){
     Car::originalPrice = price;
     return 200;
 }
-int Car::setBonus(int bonus){
-    Car::bonus = bonus;
+int Car::setNotSoldBonus(int bonus){
+    Car::notSoldBonus = bonus;
     return 200;
 }
 int Car::setCurrentPrice(int price){
@@ -87,13 +80,17 @@ int Car::addYearsOwned(){
 }
 
 int Car::calculatePrice(int year){
-    int price;
+    int price = Car::getOriginalPrice();
     int tmpPrice;
     int yearLeft;
     yearLeft = year - Car::getYearBuilt();
     tmpPrice = Car::getLowerValuePerYear() * yearLeft;
-    tmpPrice += Car::getYearsOwned() * Car::getDecreaseAmmount();
-    price = tmpPrice;
+    int oldPrice = price;
+    price -= tmpPrice;
+    if (price < 100)
+    {
+        price = oldPrice;
+    }
     Car::setCurrentPrice(price);
     return 200;
 }

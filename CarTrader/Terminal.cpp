@@ -96,6 +96,31 @@ int Terminal::findCommand(std::string command){
         }
         return 200;
     }
+    // std::string getCompany();
+    //     std::string getModel();
+    //     int getLowerValuePerYear();
+    //     int getDecreaseAmmount();
+    //     int getOriginalPrice();
+    //     int getBonus();
+    //     int getCurrentPrice();
+    //     int getYearBuilt();
+    //     int getYearsOwned();
+    else if (command == "cars"){
+        std::cout << "Cars Owned By User: " << Terminal::loggedInUser.getUsername() << std::endl;
+        for (Car i : Terminal::registeredCars){
+            i.calculatePrice(Terminal::year);
+            std::cout <<
+            "Car Model: " << i.getModel() << ", " <<
+            "Car Comapny: " << i.getCompany() << ", " <<
+            "Owned For: " << i.getYearsOwned() << " Year/s, " <<
+            "Car Built: " << i.getYearBuilt() << ", " <<
+            "Original Price: " << i.getOriginalPrice() << ", " <<
+            "Decrease per year: " << i.getLowerValuePerYear() << ", " <<
+            "Not Sold Bonus: " << i.getNotSoldBonus() << ", " <<
+            "Current Price: " << i.getCurrentPrice() << std::endl;
+        }
+        return 200;
+    }
     else if (command == "exit" || command == "e"){
         Terminal::loop = false;
         return 200;

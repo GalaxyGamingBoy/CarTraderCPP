@@ -17,7 +17,17 @@ int main(){
     terminal.loggedInUser = guestUser;
     terminal.registeredUsers.push_back(guestUser);
 
-    Car car;
+    Car testCar;
+    testCar.setYearBuilt(2020);
+    testCar.setLowerValuePerYear(1000);
+    testCar.setNotSoldBonus(testCar.getLowerValuePerYear() / 4);
+    testCar.setCompany("GComp");
+    testCar.setOwnedBy(terminal.registeredUsers[0]);
+    testCar.setOriginalPrice(10000);
+    testCar.setModel("Model G");
+    testCar.addYearsOwned();
+
+    terminal.registeredCars.push_back(testCar);
     terminal.startTerminal(cl);
 
     return 0;
