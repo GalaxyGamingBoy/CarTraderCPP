@@ -20,5 +20,5 @@ You can edit the project with the button below!
 - Download the repo
 - Unzip the project
 - On a command prompt and navigate to folder
-- Run `bash build.sh`
+- Type `bash build.sh`
 - Done
