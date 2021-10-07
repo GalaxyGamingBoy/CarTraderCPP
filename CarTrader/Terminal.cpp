@@ -1,8 +1,40 @@
 #include <iostream>
+#include <string>
 #include <vector>
+#include <fstream>
 
 #include "Headers/Terminal.h"
+#include "Headers/JSON/json.hpp"
 
+void Terminal::registerTestCars(){
+    for (int i; i < Terminal::startCars["Count"]; i++){
+        std::cout << "Registering Car Model: " << Terminal::startCars["Cars"][i]["model"] << std::endl;
+        Car newCar;
+        newCar.setCompany(Terminal::startCars["Cars"][i]["company"]);
+        newCar.setModel(Terminal::startCars["Cars"][i]["model"]);
+        newCar.setLowerValuePerYear(Terminal::startCars["Cars"][i]["lowerValuePerYear"]);
+        newCar.setOriginalPrice(Terminal::startCars["Cars"][i]["originalPrice"]);
+        newCar.setNotSoldBonus(Terminal::startCars["Cars"][i]["notSoldBonus"]);
+        newCar.setYearBuilt(Terminal::startCars["Cars"][i]["yearBuilt"]);
+        newCar.resetYearsOwned();
+        newCar.setOwnedBy(Terminal::loggedInUser);
+        Terminal::registeredCars.push_back(newCar);
+    }
+}
+
+std::string readfile(std::string file){
+    std::string ln;
+    std::string content;
+    std::ifstream fl(file);
+    if(fl.is_open()){
+        while(std::getline(fl, ln)){
+            content += ln;
+            content += "\n";
+        }
+        fl.close();
+        return content;
+    }else return "ERROR: UNABLE / NOT FOUND REQUESTED FILE!";
+}
 void Terminal::registerUser(){
     std::string newUsername;
     std::string newPassword;
@@ -96,29 +128,30 @@ int Terminal::findCommand(std::string command){
         }
         return 200;
     }
-    // std::string getCompany();
-    //     std::string getModel();
-    //     int getLowerValuePerYear();
-    //     int getDecreaseAmmount();
-    //     int getOriginalPrice();
-    //     int getBonus();
-    //     int getCurrentPrice();
-    //     int getYearBuilt();
-    //     int getYearsOwned();
     else if (command == "cars"){
         std::cout << "Cars Owned By User: " << Terminal::loggedInUser.getUsername() << std::endl;
         for (Car i : Terminal::registeredCars){
-            i.calculatePrice(Terminal::year);
-            std::cout <<
-            "Car Model: " << i.getModel() << ", " <<
-            "Car Comapny: " << i.getCompany() << ", " <<
-            "Owned For: " << i.getYearsOwned() << " Year/s, " <<
-            "Car Built: " << i.getYearBuilt() << ", " <<
-            "Original Price: " << i.getOriginalPrice() << ", " <<
-            "Decrease per year: " << i.getLowerValuePerYear() << ", " <<
-            "Not Sold Bonus: " << i.getNotSoldBonus() << ", " <<
-            "Current Price: " << i.getCurrentPrice() << std::endl;
+            if (i.getOwnedBy().getUsername() == Terminal::loggedInUser.getUsername())
+            {
+                i.calculatePrice(Terminal::year);
+                std::cout <<
+                "Car Model: " << i.getModel() << ", " <<
+                "Car Comapny: " << i.getCompany() << ", " <<
+                "Owned For: " << i.getYearsOwned() << " Year/s, " <<
+                "Car Built: " << i.getYearBuilt() << ", " <<
+                "Original Price: " << i.getOriginalPrice() << ", " <<
+                "Decrease per year: " << i.getLowerValuePerYear() << ", " <<
+                "Not Sold Bonus: " << i.getNotSoldBonus() << ", " <<
+                "Current Price: " << i.getCurrentPrice() << std::endl;
+            }
         }
+        return 200;
+    }
+    else if (command == "registerTestCars"){
+        Terminal::registerTestCars();
+        return 200;
+    }
+    else if (command == "test"){
         return 200;
     }
     else if (command == "exit" || command == "e"){
@@ -149,5 +182,11 @@ void Terminal::requestForUserInput(){
 void Terminal::startTerminal(CommandList cl){
     Terminal::commandList = cl;
     Terminal::loop = true;
+
+    Terminal::startCars = nlohmann::json::parse(readfile("./Files/startCars.json"));
+
+    // Generate start cars
+    Terminal::registerTestCars();
+
     Terminal::requestForUserInput();
 }

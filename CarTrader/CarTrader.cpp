@@ -9,14 +9,14 @@ int main(){
     int year = 2021;
     User guestUser;
     guestUser.setUsername("guest");
-    guestUser.setPassword("password", "guestPassword");
+    guestUser.setPassword("password", "guest");
 
     CommandList cl;
     Terminal terminal;
 
     terminal.loggedInUser = guestUser;
     terminal.registeredUsers.push_back(guestUser);
-
+    
     terminal.startTerminal(cl);
 
     return 0;

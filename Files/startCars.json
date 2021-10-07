@@ -1,28 +1,29 @@
 {
   "Cars":[
     {
-    "Company": "GComp",
-    "Model": "Model A",
+    "company": "GComp",
+    "model": "Model A",
     "lowerValuePerYear": 100,
     "originalPrice": 10000,
     "notSoldBonus": 250,
     "yearBuilt": 2000
     },
     {
-    "Company": "GComp",
-    "Model": "Model B",
+    "company": "GComp",
+    "model": "Model B",
     "lowerValuePerYear": 200,
     "originalPrice": 10000,
     "notSoldBonus": 250,
     "yearBuilt": 2010
     },
     {
-    "Company": "GComp",
-    "Model": "Model C",
+    "company": "GComp",
+    "model": "Model C",
     "lowerValuePerYear": 250,
     "originalPrice": 10000,
     "notSoldBonus": 250,
     "yearBuilt": 2020
     }
-  ]
+  ],
+  "Count": 3
 }
